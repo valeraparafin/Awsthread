@@ -12,9 +12,9 @@ void main() => runApp(MaterialApp(
   routes: {
   // '/' : (context) => Loading(),
     '/home' : (context) => Home(),
-    '/signup' : (context) => SignUp(),
-    '/confirm' : (context) => Confirm(),
-    '/login' : (context) => Login(),
+    '/signup' : (context) => SignUpScreen(),
+    '/confirm' : (context) => ConfirmationScreen(),
+    '/login' : (context) => LoginScreen(),
     '/thread' : (context) => Thread(),
     '/detail' : (context) => Detail(),
   },
