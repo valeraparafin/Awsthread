@@ -10,7 +10,7 @@ import 'package:listcognitoidentity/confirmation.dart';
 void main() => runApp(MaterialApp(
   initialRoute: '/home',
   routes: {
-  // '/' : (context) => Loading(),
+    '/' : (context) => Loading(),
     '/home' : (context) => Home(),
     '/signup' : (context) => SignUpScreen(),
     '/confirm' : (context) => ConfirmationScreen(),

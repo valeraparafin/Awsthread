@@ -7,14 +7,11 @@ import 'package:http/http.dart' as http;
 import 'package:amazon_cognito_identity_dart/cognito.dart';
 import 'package:amazon_cognito_identity_dart/sig_v4.dart';
 import 'package:listcognitoidentity/User.dart';
-import 'package:listcognitoidentity/services/getuservalue.dart';
-import 'package:listcognitoidentity/confirmation.dart';
-import 'package:listcognitoidentity/services/storage.dart';
+
+import 'login.dart';
 
 class Thread extends StatefulWidget {
   Thread({Key key, this.email}) : super(key: key);
-  // Setup endpoints here:
-
 
 
   final String email;
@@ -28,7 +25,6 @@ class _ThreadState extends State<Thread> {
   final _userService = new UserService(userPool);
   AwsSigV4Client _awsSigV4Client;
   User _user = new User();
-  Counter _counter = new Counter(0);
   bool _isAuthenticated = false;
 
   static const _region = 'us-east-2';
@@ -66,12 +62,12 @@ class _ThreadState extends State<Thread> {
         builder: (context, AsyncSnapshot<UserService> snapshot) {
           if (snapshot.hasData) {
             if (!_isAuthenticated) {
-              return new Thread();
+              return new LoginScreen();
             }
 
             return new Scaffold(
               appBar: new AppBar(
-                title: new Text('Secure Counter'),
+                title: new Text('Thread'),
               ),
               body: new Center(
                 child: new Column(
@@ -79,14 +75,6 @@ class _ThreadState extends State<Thread> {
                   children: <Widget>[
                     new Text(
                       'Welcome ${_user.name}!',
-                      style: Theme.of(context).textTheme.display1,
-                    ),
-                    new Divider(),
-                    new Text(
-                      'You have pushed the button this many times:',
-                    ),
-                    new Text(
-                      '${_counter.count}',
                       style: Theme.of(context).textTheme.display1,
                     ),
                     new Divider(),

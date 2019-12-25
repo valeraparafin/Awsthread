@@ -5,7 +5,7 @@ import 'package:listcognitoidentity/services/awsuserpool.dart';
 import 'package:listcognitoidentity/User.dart';
 
 
-const _identityPoolId = 'us-east-2:e4060a2b-ede7-42d4-94b0-9378c1ea50ce';
+const _identityPoolId = 'us-east-2:f2b877d5-4b28-4cc2-8630-c0707799fc7a';
 
 class UserService {
   CognitoUserPool _userPool;
