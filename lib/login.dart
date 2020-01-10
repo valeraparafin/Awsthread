@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:listcognitoidentity/User.dart';
 import 'package:listcognitoidentity/services/userservice.dart';
 import 'package:listcognitoidentity/services/awsuserpool.dart';
-import 'package:listcognitoidentity/confirmation.dart';
 import 'package:amazon_cognito_identity_dart/cognito.dart';
 import 'package:listcognitoidentity/thread.dart';
 
@@ -33,10 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
     String message;
     try {
       _user = await _userService.login(_user.email, _user.password);
-      message = 'User sucessfully logged in!';
+        message = 'User sucessfully logged in!';
+
+
       if (!_user.confirmed) {
         message = 'Please confirm user account';
       }
+
     } on CognitoClientException catch (e) {
       if (e.code == 'InvalidParameterException' ||
           e.code == 'NotAuthorizedException' ||
@@ -51,26 +53,18 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     final snackBar = new SnackBar(
       content: new Text(message),
-      action: new SnackBarAction(
-        label: 'OK',
-        onPressed: () async {
-          if (_user.hasAccess) {
-            Navigator.pop(context);
-            if (!_user.confirmed) {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(
-                    builder: (context) =>
-                    new Thread(email: _user.email)),
-              );
-            }
-          }
-        },
-      ),
-      duration: new Duration(seconds: 30),
+      duration: new Duration(seconds: 3),
     );
 
     Scaffold.of(context).showSnackBar(snackBar);
+
+    if (_user.hasAccess) {
+      await Navigator.push(
+          context,
+          new MaterialPageRoute(
+              builder: (context) =>
+              new Thread()));
+    }
   }
 
   @override
